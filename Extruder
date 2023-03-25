@@ -1,1 +1,53 @@
+# This is my extruder settings. 
 
+# Extruder is Biqu H2 V2S Direct Drive. 
+[extruder]
+step_pin: PB3
+dir_pin: !PB4
+enable_pin: !PD1
+microsteps: 16
+rotation_distance: 3.443
+nozzle_diameter: 0.500
+filament_diameter: 1.750
+heater_pin: PC8
+sensor_type: Generic 3950
+sensor_pin: PA0
+#control: pid
+#pid_Kp: 21.527
+#pid_Ki: 1.063
+#pid_Kd: 108.982
+min_temp: 0
+max_temp: 270
+min_extrude_temp: 170
+pressure_advance: 0.06
+pressure_advance_smooth_time: 0.005
+max_extrude_cross_section: 50.0
+
+# Increased tolerances due to 12V (slower heating) and 5015 Blower fan.
+[verify_heater extruder]
+max_error: 240
+check_gain_time: 60
+hysteresis: 5
+heating_gain: 2
+
+# Lower current than manufacturer recommendation to lower heat and wear.
+[tmc2209 extruder]
+uart_pin: PC11
+tx_pin: PC10
+uart_address: 3
+run_current: 0.800
+stealthchop_threshold: 999999
+
+# Heatbreak fan always on when heating and always on when above 50c.
+[heater_fan heatbreak_cooling_fan]
+pin: PC7
+heater: extruder
+heater_temp: 50.0
+
+# Part fan. I use a Sunon MF50151VX-A99 and HWPWM with a low cycle time to eliminate PWM noise. Max_power due to it being way to strong for my needs! :)
+# This requires both a board that has HWPWM and a fan that can run at those cycles. Most DC 2-pin fans will scream at you or not run at all!
+[fan]
+pin: PC6
+cycle_time: 0.00004
+hardware_pwm: True
+max_power: 0.1
