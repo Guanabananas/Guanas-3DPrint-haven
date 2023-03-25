@@ -104,6 +104,9 @@ resolution: 1.0
 #Enables Pause/Resume function
 [pause_resume]
 
+#Enables object labeling in slicer. Needed for KAMP to work properly without custom Slicer code.
+[exclude_object]
+
 #Enables M600 Colour change codes from the slicer.
 [gcode_macro M600]
 gcode:
