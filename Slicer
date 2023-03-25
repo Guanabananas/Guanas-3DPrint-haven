@@ -1,0 +1,25 @@
+# These are my slicer codes. 
+# I use SuperSlicer (Prusa clone) which you can get here https://github.com/supermerill/SuperSlicer! It's very adapted to Klipper! :)
+
+
+# Start Code. Variables within brackets so it changes with filament. 
+START_PRINT BED_TEMP=[first_layer_bed_temperature] EXTRUDER_TEMP=[first_layer_temperature] 
+
+# Stop code. Keeps the bed hot after finished print. If you like me have a 12V bed you know it takes forever to get up to even 60C and I'm printing Nylon at 75C. Woho.
+END_PRINT BED_TEMP=[first_layer_bed_temperature]
+
+# After Layer Change. Timelapse frame trigger. Putting it on "After layer change" makes the printer retract before photo and then move to the new layer start.
+# Instead of Timelapse-retract>Photo>Back to layer end>Retract>New layer.
+;AFTER_LAYER_CHANGE
+;{layer_z}
+TIMELAPSE_TAKE_FRAME
+
+# Colour change code
+M600
+
+# Filament start code. I use it for different PA settings and if the material requires a bit more height (petg etc).
+SET_PRESSURE_ADVANCE ADVANCE=0.05
+SET_GCODE_OFFSET Z=0 MOVE=1 #This one sets what you write. It doesn't add to the current setting. Use - to go below 0 (Z=-0.02)
+
+# Filament end code. Resets Z_offset to Z=0 after finished print.
+SET_GCODE_OFFSET Z=0 MOVE=1
