@@ -1,6 +1,8 @@
 # These are my slicer codes. 
 # I use SuperSlicer (Prusa clone) which you can get here https://github.com/supermerill/SuperSlicer! It's very adapted to Klipper! :)
 
+# If using other slices change the variables to the following format (list incomplete):
+# Cura: {material_print_temperature_layer_0} {material_bed_temperature_layer_0}
 
 # Start Code. Variables within brackets so it changes with filament. 
 START_PRINT BED_TEMP=[first_layer_bed_temperature] EXTRUDER_TEMP=[first_layer_temperature] 
