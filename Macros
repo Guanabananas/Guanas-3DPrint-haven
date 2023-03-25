@@ -1,1 +1,186 @@
+Here are all my macros that I use. There is a short description before each one.
 
+
+#Loads filament through a 30-35cm bowden tube. Do not use with Direct Drive. 
+[gcode_macro FILAMENT_LOAD_BOWDEN]
+gcode:
+ G1 X150 Y150 Z50 F1500 # Move to middle of bed and 5 cm up
+ M83                   # Put the extruder into relative mode
+ G92 E0.0              # Reset the extruder so that it thinks it is at position zero
+ G1 E50 F500
+ G1 E50 F500 
+ G1 E50 F500 
+ G1 E50 F500 
+ G1 E50 F500
+ G1 E50 F500
+ G1 E50 F500
+ G1 E50 F500
+ G1 E50 F100
+ G1 E50 F100 
+ G92 E0.0              # Reset the extruder again
+ G1 E-5 F100
+ G92 E0.0
+ M82                   # Put the extruder back into absolute mode.
+
+#Unloads filament through a bowden tube. Do not use with Direct Drive. 
+[gcode_macro FILAMENT_UNLOAD_BOWDEN]
+gcode:
+ G1 X150 Y150 Z50 F1500 # Move to middle of bed and 5 cm up
+ M83                   # Put the extruder into relative mode
+ G92 E0.0              # Reset the extruder so that it thinks it is at position zero
+ G1 E20 F500
+ G1 E-50 F500
+ G1 E-50 F500
+ G92 E0.0              # Reset the extruder again
+ M82                   # Put the extruder back into absolute mode.
+
+#Start_print macro that starts with getting bed temp from slicer and pre-heats extruder. Then it uses KAMP (https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging) to do a new mesh and purge.
+[gcode_macro START_PRINT]
+gcode:
+    # Load variables
+    {% set bed_temp = params.BED_TEMP|default(60)|int %}
+    {% set extruder_temp = params.EXTRUDER_TEMP|default(180)|int %}
+    # Welcome and report temperatures
+    M117 Welcome, today we are printing at extruder:{extruder_temp} and bed:{bed_temp}
+    # Prepare for pre-print stuff
+    SET_HEATER_TEMPERATURE HEATER=heater_bed TARGET={bed_temp}
+    SET_HEATER_TEMPERATURE HEATER=extruder TARGET=180
+    # Wait for temp
+    TEMPERATURE_WAIT SENSOR=heater_bed MINIMUM={bed_temp}
+    # Home before mesh
+    G28 ;home
+    #Set acceleration higher for Mesh
+    M204 S750
+    #Setup KAMP
+    SETUP_KAMP_MESHING
+    SETUP_VORON_PURGE ADAPTIVE_ENABLE=1 Distance_to_object_y=35
+    # Perform Mesh Calibration
+    BED_MESH_CALIBRATE 
+    # Save mesh profile
+    BED_MESH_PROFILE save={bed_temp}
+    # Load mesh profile
+    BED_MESH_PROFILE load={bed_temp}
+    # Set Extruder temp to print
+    SET_HEATER_TEMPERATURE HEATER=extruder TARGET={extruder_temp}
+    # Move to brushing position
+    G0 X150 Y150 Z35 F1500
+    # Reset Extruder
+    G92 E0
+    # Wait for Extruder to reach print temp
+    TEMPERATURE_WAIT SENSOR=extruder MINIMUM={extruder_temp}
+    #KAMP purge line
+    VORON_PURGE
+    # Reset Extruder
+    G92 E0
+
+#Classic end_print except retraction is shorter.
+[gcode_macro END_PRINT]
+gcode:
+   #Load variable for mesh name
+   {% set bed_temp = params.BED_TEMP|default(60)|int %}
+   M140 S0 ; turn off bed
+   G91
+   G1 X5 Y5 F3000
+   # Retract a bit
+   G1 E-2 F500
+   # Turn off extruder and fan
+   M104 S0
+   M106 S0
+   # Raise nozzle by 10mm
+   G1 Z10 F3000
+   G90
+   # Deliver print
+   G1 X0 Y280
+   # Disable steppers
+   M84 X Y E
+
+#Enables Arc Welder. Not really useful but then it understands G2 and G3 lines instead of just stopping the print.
+[gcode_arcs]
+resolution: 1.0
+
+#Enables Pause/Resume function
+[pause_resume]
+
+#Enables M600 Colour change codes from the slicer.
+[gcode_macro M600]
+gcode:
+    {% set X = params.X|default(50)|float %}
+    {% set Y = params.Y|default(0)|float %}
+    {% set Z = params.Z|default(10)|float %}
+    SAVE_GCODE_STATE NAME=M600_state
+    PAUSE
+    G91
+    G1 E-.8 F500
+    G1 Z{Z}
+    G90
+    G1 X{X} Y{Y} F3000
+    G91
+    G1 E5 F250
+    G91
+    G1 E-25 F250
+    M300 S440 P100
+    M300 S440 P100
+    RESTORE_GCODE_STATE NAME=M600_state
+
+#Client variables for parking the nozzle in Mainsail.
+[gcode_macro _CLIENT_VARIABLE]
+variable_use_custom_pos   : True ; use custom park coordinates for x,y [True/False]
+variable_custom_park_x    : 10.0   ; custom x position; value must be within your defined min and max of X
+variable_custom_park_y    : 280.0   ; custom y position; value must be within your defined min and max of Y
+Variable_custom_park_dz   : 2.0   ; custom dz value; the value in mm to lift the nozzle when move to park position
+variable_retract          : 1.0   ; the value to retract while PAUSE
+variable_cancel_retract   : 4.0   ; the value to retract while CANCEL_PRINT
+variable_speed_retract    : 20.0  ; retract speed in mm/s
+variable_unretract        : 1.0   ; the value to unretract while RESUME
+variable_speed_unretract  : 20.0  ; unretract speed in mm/s
+variable_speed_hop        : 15.0  ; z move speed in mm/s
+variable_speed_move       : 100.0 ; move speed in mm/s
+variable_park_at_cancel   : True ; allow to move the toolhead to park while execute CANCEL_PRINT [True/False]
+variable_park_at_cancel_x : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+variable_park_at_cancel_y : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+gcode:
+
+#Enables the use of M300 to use the beeper! Toot toot! :)
+[gcode_macro M300]
+gcode:  
+  {% set S = params.S|default(1000)|int %} ; S sets the tone frequency
+  {% set P = params.P|default(100)|int %} ; P sets the tone duration
+  {% set L = 0.5 %} ; L varies the PWM on time, close to 0 or 1 the tone gets a bit quieter. 0.5 is a symmetric waveform
+  {% if S <= 0 %} ; dont divide through zero
+  {% set F = 1 %}
+  {% set L = 0 %}
+  {% elif S >= 10000 %} ;max frequency set to 10kHz
+  {% set F = 0 %}
+  {% else %}
+  {% set F = 1/S %} ;convert frequency to seconds 
+  {% endif %}
+  SET_PIN PIN=beeper VALUE={L} CYCLE_TIME={F} ;Play tone
+  G4 P{P} ;tone duration
+  SET_PIN PIN=beeper VALUE=0
+
+#Prevents x/y/z steppers from going into idle mode and then requiring homing when paused for more than 10 minutes. Turns off heaters for power saving.
+[idle_timeout]
+gcode:
+    SET_STEPPER_ENABLE STEPPER=extruder ENABLE=0 # disable the extruder motor
+    TURN_OFF_HEATERS
+#   A list of G-Code commands to execute on an idle timeout. See
+#   docs/Command_Templates.md for G-Code format. The default is to run
+#   "TURN_OFF_HEATERS" and "M84".
+timeout: 600
+#   Idle time (in seconds) to wait before running the above G-Code
+#   commands. The default is 600 seconds.
+
+#Funky code to make Pressure Advance variable when moving at different speeds. Uses the pressure advance you set during the PA test at 100mm/s then does some cool calculations! 
+[gcode_macro G0]
+rename_existing: G99999
+gcode:
+    {% set p=[] %}
+        {% for key in params %}
+    {% set p = p.append(key + params[key]) %}
+        {% endfor %}
+        {% if params.F is defined %}
+    {% set speed = params.F|int/60 %}
+    {% set pa = printer.configfile.settings.extruder.pressure_advance * ( 100 / speed ) %}
+    SET_PRESSURE_ADVANCE ADVANCE={pa}
+        {% endif %}
+        G99999 { p|join(" ") }
