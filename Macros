@@ -35,7 +35,9 @@ gcode:
  M82                   # Put the extruder back into absolute mode.
 
 #Start_print macro that starts with getting bed temp from slicer and pre-heats extruder. 
-Then it uses KAMP (https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging) to do a new mesh and purge.
+#Then it uses KAMP (https://github.com/kyleisah/Klipper-Adaptive-Meshing-Purging) to do a new mesh and purge.
+#Requires special start code in slicer and that you have KAMP installed in your Klipper. 
+#To use without KAMP remove 57, 58, 59 and 75. Then add manual purge line if needed.
 [gcode_macro START_PRINT]
 gcode:
     # Load variables
