@@ -1,1 +1,61 @@
+# This is my bed, probe and mesh related settings. 
 
+# Probe settings for using an inductive probe
+[probe]
+pin: ^!PC14
+x_offset: 37
+y_offset: -37
+#z_offset: 15
+speed: 5
+samples: 2
+samples_result: average
+sample_retract_dist: 5
+samples_tolerance: 0.050
+samples_tolerance_retries: 3
+lift_speed: 50
+
+# BL/CR Touch probe settings. Change offsets to your own. 
+# Z_offset is 15 to provide plenty of steps when doing PROBE_CALIBRATE if you don't let the nozzle go below Z=0.
+[bltouch]
+sensor_pin: ^PC14
+control_pin: PA1
+x_offset: -45
+y_offset: -6
+Z_offset: 15
+
+# Where the home is for the probe. Home_XY_position is where the nozzle is when the probe is home.
+[safe_z_home]
+home_xy_position: 110, 186   # Nozzle coordinates
+speed: 75
+z_hop: 10
+z_hop_speed: 50
+
+# Bed screws, nozzle position.
+[bed_screws]
+screw1: 40, 40
+screw2: 212, 40
+screw3: 212, 260
+screw4: 40, 260
+
+# Tramming Wizard, probe position.
+[screws_tilt_adjust]
+screw1: 1, 80
+screw1_name: front left screw
+screw2: 225, 80
+screw2_name: front right screw
+screw3: 225, 285
+screw3_name: rear right screw
+screw4: 1, 285
+screw4_name: rear left screw
+horizontal_move_z: 10.
+speed: 50.
+screw_thread: CW-M3
+
+# Bed mesh, I have a bumpy bed so 10x10 is good. Speed is increased due to tight tolerances plus inductive probe.
+[bed_mesh]
+speed: 150
+horizontal_move_z: 5
+mesh_min: 40, 10
+mesh_max: 275, 250
+probe_count: 10, 10
+algorithm: bicubic
