@@ -4,7 +4,10 @@ Hi,
 This is my macro dump for Klipper.
 
 **My setup:**
-
+- Klipper
+  - Mainsail
+  - Crowsnest
+  - KAMP
 - Base: CR-10v1 (2017)
 - Mods:
   - BTT SKR Mini E3 V3.0
