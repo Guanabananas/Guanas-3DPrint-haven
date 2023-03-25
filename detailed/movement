@@ -1,0 +1,27 @@
+# Here are all my movement related settings
+
+# Accelerometer. Buy one! They are cheap! Use a Cat5e network cable to connect it to the pi! :) 
+[adxl345]
+cs_pin: rpi:None
+
+# Resonance test settings
+[resonance_tester]
+accel_chip: adxl345
+probe_points: 150, 150, 20  # an example
+
+# input shaped based on the results from accelerometer
+[input_shaper]
+shaper_freq_x: 60  # frequency for the X mark of the test model (11200mm/s^2 max with MZV)
+shaper_freq_y: 24.4  # frequency for the Y mark of the test model (2000mm/s^2 ZV)
+shaper_type_x: ei
+shaper_type_y: ei
+
+#My speeeeeeeeeeds
+[printer]
+kinematics: cartesian
+max_velocity: 650
+max_accel: 1500
+max_accel_to_decel: 750
+max_z_velocity: 15
+max_z_accel: 100
+square_corner_velocity: 7
