@@ -1,1 +1,58 @@
+# Stepper settings because why not?
 
+# Homing_retract_dist to make sure the endstop disengages completely before smashing it again.
+[stepper_x]
+step_pin: PB13
+dir_pin: !PB12
+enable_pin: !PB14
+microsteps: 16
+rotation_distance: 40
+endstop_pin: ^PC0
+position_endstop: 0
+position_max: 300
+homing_speed: 75
+homing_retract_dist: 10
+
+[tmc2209 stepper_x]
+uart_pin: PC11
+tx_pin: PC10
+uart_address: 0
+run_current: 0.750
+stealthchop_threshold: 999999
+
+[stepper_y]
+step_pin: PB10
+dir_pin: !PB2
+enable_pin: !PB11
+microsteps: 16
+rotation_distance: 40
+endstop_pin: ^PC1
+position_endstop: 0
+position_max: 300
+homing_speed: 75
+
+[tmc2209 stepper_y]
+uart_pin: PC11
+tx_pin: PC10
+uart_address: 2
+run_current: 0.750
+stealthchop_threshold: 999999
+
+# Endstop_pin for probe. Position_min: -0.2 for bumpy bed where the home sometimes is higher than other points.
+[stepper_z]
+step_pin: PB0
+dir_pin: PC5
+enable_pin: !PB1
+microsteps: 16
+rotation_distance: 8
+endstop_pin: probe:z_virtual_endstop
+position_max: 400
+position_min: -0.2
+
+# High current due to dual Z on one driver. No problems with heat on board.
+[tmc2209 stepper_z]
+uart_pin: PC11
+tx_pin: PC10
+uart_address: 1
+run_current: 1.2
+stealthchop_threshold: 999999
