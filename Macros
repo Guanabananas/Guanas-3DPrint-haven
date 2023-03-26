@@ -176,7 +176,8 @@ timeout: 600
 #   Idle time (in seconds) to wait before running the above G-Code
 #   commands. The default is 600 seconds.
 
-#Funky code to make Pressure Advance variable when moving at different speeds. Uses the pressure advance you set during the PA test at 100mm/s then does some cool calculations! 
+# *NOTE! THIS DOES NOT WORK WITH KAMP PURGE!* 
+# Funky code to make Pressure Advance variable when moving at different speeds. Uses the pressure advance you set during the PA test at 100mm/s then does some cool calculations! 
 # Copy code below and replace G0 and G99999 with G1 and G99998, depending on which move code you use.
 [gcode_macro G0]
 rename_existing: G99999
