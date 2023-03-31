@@ -4,8 +4,11 @@
 # If using other slices change the variables to the following format (list incomplete):
 # Cura: {material_print_temperature_layer_0} {material_bed_temperature_layer_0}
 
-# Start Code. Variables within brackets so it changes with filament. 
-START_PRINT BED_TEMP=[first_layer_bed_temperature] EXTRUDER_TEMP=[first_layer_temperature] 
+# Start Code. Variables within brackets so it changes with filament. M140 and M104 prevents some slicers from adding its own start code. 
+M140 S0
+M104 S0
+M204 S500
+START_PRINT BED_TEMP=[first_layer_bed_temperature] EXTRUDER_TEMP=[first_layer_temperature]
 
 # Stop code. Keeps the bed hot after finished print. If you like me have a 12V bed you know it takes forever to get up to even 60C and I'm printing Nylon at 75C. Woho.
 END_PRINT BED_TEMP=[first_layer_bed_temperature]
