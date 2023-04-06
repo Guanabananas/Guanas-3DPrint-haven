@@ -15,9 +15,11 @@ END_PRINT BED_TEMP=[first_layer_bed_temperature]
 
 # After Layer Change. Timelapse frame trigger. Putting it on "After layer change" makes the printer retract before photo and then move to the new layer start.
 # Instead of Timelapse-retract>Photo>Back to layer end>Retract>New layer.
+# M117 that displays current layer out of total layer on the display.
 ;AFTER_LAYER_CHANGE
 ;{layer_z}
 TIMELAPSE_TAKE_FRAME
+M117 [layer_num] of [total_layer_count] 
 
 # Colour change code
 M600
