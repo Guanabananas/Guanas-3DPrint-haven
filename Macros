@@ -40,16 +40,22 @@ gcode:
 #To use without KAMP remove 57, 58, 59 and 75. Then add manual purge line if needed.
 [gcode_macro START_PRINT]
 gcode:
+  [gcode_macro START_PRINT]
+gcode:
     # Load variables
     {% set bed_temp = params.BED_TEMP|default(60)|int %}
     {% set extruder_temp = params.EXTRUDER_TEMP|default(180)|int %}
+    # Set printer to Absolute
+    G90
     # Welcome and report temperatures
     M117 Welcome, today we are printing at extruder:{extruder_temp} and bed:{bed_temp}
     # Prepare for pre-print stuff
-    SET_HEATER_TEMPERATURE HEATER=heater_bed TARGET={bed_temp}
-    SET_HEATER_TEMPERATURE HEATER=extruder TARGET=180
+    SET_HEATER_TEMPERATURE HEATER=heater_bed TARGET={bed_temp + 1}
+    TEMPERATURE_WAIT SENSOR=heater_bed MINIMUM={bed_temp - 5}
+    SET_HEATER_TEMPERATURE HEATER=extruder TARGET=160
     # Wait for temp
     TEMPERATURE_WAIT SENSOR=heater_bed MINIMUM={bed_temp}
+    SET_HEATER_TEMPERATURE HEATER=heater_bed TARGET={bed_temp}
     # Home before mesh
     G28 ;home
     #Set acceleration higher for Mesh
