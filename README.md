@@ -1,8 +1,26 @@
-# Guana-Klipper
+# Guana's 3D Printing Haven
 Hi, 
 
-This is my information dump for my printer and Klipper.
-I have some configs for Marlin that I can post here if wanted.
+This is my 3D Printing haven. A place for me to store configs, ideas, settings, hardware specs, and other things!
+
+You're welcome to use all of the material I put here! I will update it as I see necessary or if I get a request that I think would be beneficial for you guys or for me later on! 
+
+This haven will mainly contain the following:
+  - Klipper
+    - Macros
+    - Configs
+    - Cool stuff
+  - Marlin
+    - Config
+    - Complied firmware
+  - Hardware
+    - My upgrade plans
+    - Tips and tricks for aftermarket upgrades
+    - Links to good prints
+  - Random
+    - Shopping lists
+    - Links to useful guides
+    - Stuff
 
 **My setup:**
 - Klipper
