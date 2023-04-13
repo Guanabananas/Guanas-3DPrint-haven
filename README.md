@@ -13,6 +13,8 @@ This haven will mainly contain the following:
   - Marlin
     - Config
     - Complied firmware
+  - Slicers
+    - Slicer specific settings and tips
   - Hardware
     - My upgrade plans
     - Tips and tricks for aftermarket upgrades
@@ -20,7 +22,8 @@ This haven will mainly contain the following:
   - Random
     - Shopping lists
     - Links to useful guides
-    - Stuff
+    - ToDo-Github
+    - ToDo-Printers
 
 **My setup:**
 - Klipper
