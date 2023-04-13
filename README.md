@@ -3,13 +3,12 @@ Hi,
 
 This is my 3D Printing haven. A place for me to store configs, ideas, settings, hardware specs, and other things!
 
-You're welcome to use all of the material I put here! I will update it as I see necessary or if I get a request that I think would be beneficial for you guys or for me later on! 
+You're welcome to use all of the material I put here! I will update it as I see necessary or if I get a request that I think would be beneficial for you guys or for me later on! If you have any questions just hit me up on Reddit in the link below! 
 
 This haven will mainly contain the following:
   - Klipper
     - Macros
     - Configs
-    - Cool stuff
   - Marlin
     - Config
     - Complied firmware
@@ -47,4 +46,4 @@ This haven will mainly contain the following:
   - Square corner velocity: $7mm/s$  - New max TBD
   - Max Accel. to Decel: $750mm/s^2$  - New max TBD
 
-If you have any questions hit me up on Reddit https://www.reddit.com/user/Guana-bananas! I have no idea how to use Github! 
+If you have any questions hit me up on Reddit https://www.reddit.com/user/Guana-bananas! Please try to use comprehensive english or swedish when writing to me. 
