@@ -1,7 +1,8 @@
 # Guana-Klipper
 Hi, 
 
-This is my macro dump for Klipper.
+This is my information dump for my printer and Klipper.
+I have some configs for Marlin that I can post here if wanted.
 
 **My setup:**
 - Klipper
