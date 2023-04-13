@@ -1,0 +1,25 @@
+My notes about my Biqu H2 V2S
+
+Upgrades:
+  All-metal tube (300c)
+  50W heat cartridge
+  High temp thermistor
+  
+Notes:
+  Tolerances when manufacturing are too large, creates gaps in gears which makes it click and grind.
+    Leads to: Movement of plastic delayed just a tiny bit and causes gaps at the start of a line and blobs at the end also filament buildup in the nozzle. 
+              Prevents PA from working correctly.
+    Quick fix: Small piece of kapton tape on the outside of bearings then carefully re-assemble the extruder and force gears to stay engaged. Won't fix problem 100%.
+  Shipped without any mounting equipment and has no "standard" mounting holes so a custom plate is required.
+  Weak stepper sadly.
+  OG Fan is 24V only. You can mount a 4010 fan without adaptor if you mount it with one screw in the lower hole closest to the mounting plate. I used Noctua 4020 fan.
+    
+When new: 
+   Disassemble and check tolerances
+   Put PTFE-grease or other on gears
+   Re-assemble carefully
+    
+Tips and tricks:
+  I used the MAD fan duct + mounting system which worked out fine when printed in a strong and sturdy plastic.
+  10mm^3/s max volumetric flow is the sweet spot for this extruder.
+  
