@@ -8,3 +8,5 @@
 - Add BTT SKR Mini E3 V3.0 guide
 - Add good prints to list
 - Add intros to all folders
+- Rename all "non-config" files to .md and fix formating
+- Separate slicers and add useful information
