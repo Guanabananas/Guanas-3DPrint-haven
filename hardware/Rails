@@ -1,0 +1,54 @@
+Information about my rails
+CR-10 (v1) - 300x300 print size
+You'll lose around 25mm on the Z-axis if mounted on specified alu profiles which sits on top of stock frame. 
+
+Tips: 
+  Always print out rail mounting alignment tools beforehand. If drilling holes in Y-sled, print drill template before and use drill press.
+  Use 3.2mm drill bit for Y-sled
+  Do not overtighten sled screws, use spring washers to secure screws. 
+  Use M3 screws with T-nuts to secure rails
+  Use M5 bolts with T-nuts to secure profiles
+  
+  Carriage drill dimensions: 
+    MGN12H - 20x20mm
+    MGN12C - 15x20mm
+    
+  Brands: 
+    HIWIN - This is the top brand with the MGN sizes. Expensive and probably overkill.
+    No-name: This is the usual "Chinese mainland" product. Can be hit or miss. Usual problems can be missing balls, bad balls, not lubed up from factory etc.
+  
+  If lucky, your carriage/rail had a small piece of plastic rail included. Use this to mount/remove carriages from rails!
+  MGN12 uses 3/32" (2.381mm) bearing balls in case you need to replace or add more.
+  If your carriage is a no-name brand I would recommend to clean the carriages in a bowl and then re-lube them. 
+  Use PTFE lube and apply it with a suringe if your carriages have holes for lubing. Either way your carriages allows lubing it's the way to go.
+  Lubing correctly flushes out dirt, allows lube to reach everywhere and makes the lube stay inside the carriage. 
+  Don't put lube on the rails, it just creates a mess with no benefit.
+
+X-axis
+  Rail: MGN12 - 350mm
+  Carriage: MGN12H x 1
+  
+  Mounting:
+    Indent left: TBD
+    Indent right: TBD
+    Unitak 3D Ender3 rail mounting (for CR-10/E3 X-plate)
+
+Y-axis
+  Rail: MGN12 - 400mm (450mm would be better to increase margins at min/max)
+  Carriage: MGN12C/H x 4
+
+  Mounting:
+    Indent front: TBD
+    Indent back: TBD
+    Separation: 160mm
+    Profiles: Alu 500mm 2020 x 2 
+    
+  Y-sled notes:
+    X-distance between carriage holes: 160-180mm
+    Y-distance between carriage holes: MAX 60mm if using 400mm rail
+
+Z-axis (Planned upgrade)
+  Rail: MGN12
+  Carriage: MGN12C
+  
+  Mounting:
