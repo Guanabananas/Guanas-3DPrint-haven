@@ -44,8 +44,8 @@ Y-axis
     Profiles: Alu 500mm 2020 x 2 
     
   Y-sled notes:
-    X-distance between carriage holes: 160-180mm
-    Y-distance between carriage holes: MAX 60mm if using 400mm rail
+    X-distance between carriage outer holes: 160-180mm
+    Y-distance between carriage outer holes: MAX 60mm if using 400mm rail
 
 Z-axis (Planned upgrade)
   Rail: MGN12
