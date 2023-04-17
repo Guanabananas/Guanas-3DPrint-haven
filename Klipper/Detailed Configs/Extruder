@@ -44,10 +44,9 @@ pin: PC7
 heater: extruder
 heater_temp: 50.0
 
-# Part fan. I use a Sunon MF50151VX-A99 and HWPWM with a low cycle time to eliminate PWM noise. Max_power due to it being way to strong for my needs! :)
-# This requires both a board that has HWPWM and a fan that can run at those cycles. Most DC 2-pin fans will scream at you or not run at all!
+# Part fan. I use a Sunon MF50151VX-A99. Cycle time makes it quieter but still controllable. I run it at 3% for PETG.
 [fan]
 pin: PC6
-cycle_time: 0.00004
-hardware_pwm: True
-max_power: 0.1
+cycle_time: 0.00014
+hardware_pwm: False
+max_power: 1
